@@ -15,8 +15,6 @@ public class Client extends BaseEntity {
     @Column(nullable = false)
     @NonNull
     protected String name;
-    @Column(nullable = false)
-    @NonNull
     protected String phone;
 }
 

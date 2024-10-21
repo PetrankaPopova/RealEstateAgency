@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Търсене на Имот</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+    .search-form {
+      margin-bottom: 20px;
+    }
+    .no-properties {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title has-text-centered">Търсене на Имот</h1>
+
+
+  <form th:action="@{/property/search}" method="post" class="box search-form">
+    <div class="field">
+      <label class="label" for="buyer">Изберете купувач:</label>
+      <div class="control">
+        <div class="select">
+          <select id="buyer" name="buyerId" required>
+            <option value="" disabled selected>Купувач</option>
+            <option th:each="buyer : ${buyers}" th:value="${buyer.id}" th:text="${buyer.name}"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="control">
+      <button type="submit" class="button is-primary">Търси</button>
+    </div>
+  </form>
+
+
+  <h2 class="subtitle">Намерени имоти</h2>
+  <table class="table is-striped is-bordered is-hoverable">
+    <thead>
+    <tr>
+      <th>Тип на имота</th>
+      <th>Цена</th>
+      <th>Адрес</th>
+      <th>Описание</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="property : ${properties}">
+      <td th:text="${property.propertyType}"></td>
+      <td th:text="${property.price} + ' лв.'"></td>
+      <td th:text="${property.address}"></td>
+      <td th:text="${property.description}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(properties)}">
+      <td colspan="4" class="no-properties">Няма намерени имоти за този купувач.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

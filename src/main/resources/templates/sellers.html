@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Управление на продавачи</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="number"], select {
+      padding: 8px;
+      margin: 5px 0;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Управление на продавачи</h1>
+
+<!-- Form for adding a new seller -->
+<form th:action="@{/seller}" method="post" th:object="${newSeller}">
+  <label for="name">Име:</label>
+  <input type="text" id="name" name="name" th:field="*{name}" required />
+  <br />
+
+  <label for="propertyType">Тип на имота:</label>
+  <select id="propertyType" name="propertyType" th:field="*{property.propertyType}" required>
+    <option value="HOUSE">Къща</option>
+    <option value="APARTMENT">Апартамент</option>
+    <option value="PLOT">Парцел</option>
+  </select>
+  <br />
+
+  <label for="price">Цена:</label>
+  <input type="number" id="price" name="price" th:field="*{property.price}" required />
+  <br />
+  <button type="submit">Добави продавач</button>
+</form>
+
+<h2>Списък с продавачи</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Име</th>
+    <th>Тип на имота</th>
+    <th>Цена</th>
+    <th>Действия</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="seller : ${sellers}">
+    <td th:text="${seller.name}">Име</td>
+    <td th:text="${seller.property.propertyType}">Тип на имота</td>
+    <td th:text="${seller.property.price}">Цена</td>
+    <td>
+      <div class="button-container">
+        <form th:action="@{/seller/edit/{id}(id=${seller.id})}" method="get">
+          <input type="hidden" name="id" th:value="${seller.id}" />
+          <button type="submit">Редактирай</button>
+        </form>
+        <form th:action="@{/seller/delete/{id}(id=${seller.id})}" method="post">
+          <input type="hidden" name="id" th:value="${seller.id}" />
+          <button type="submit">Изтрий</button>
+        </form>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

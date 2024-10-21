@@ -8,9 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import java.time.LocalDateTime;
 
-
-import java.util.Date;
 @Entity
 @Table(name = "viewings")
 @Data
@@ -30,5 +29,6 @@ public class Viewing extends BaseEntity {
     @NonNull
     private Buyer buyer;
     @NonNull
-    private Date date;
+    private LocalDateTime date;
+
 }

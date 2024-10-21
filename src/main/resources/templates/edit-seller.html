@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактирай Продавач</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="number"], select {
+      padding: 8px;
+      margin: 5px 0;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<h1>Редактирай Продавач</h1>
+
+<form th:action="@{/seller/edit{id}(id=${seller.id})}" method="post" th:object="${seller}" class="box">
+  <input type="hidden" th:field="*{id}" />
+
+  <label for="name">Име:</label>
+  <input type="text" id="name" name="name" th:field="*{name}" required />
+  <br />
+
+  <label for="propertyType">Тип на имота:</label>
+  <select id="propertyType" name="propertyType" th:field="*{property.propertyType}" required>
+    <option value="HOUSE">Къща</option>
+    <option value="APARTMENT">Апартамент</option>
+    <option value="PLOT">Парцел</option>
+  </select>
+  <br />
+
+  <label for="price">Цена:</label>
+  <input type="number" id="price" name="price" th:field="*{property.price}" required />
+  <br />
+  <button type="submit">Запази Промените</button>
+</form>
+</body>
+</html>

@@ -31,20 +31,4 @@ public class Agent extends BaseEntity {
     private List<Viewing> viewings = new ArrayList<>();
     private double earnings;
 
-    public void addSeller(Seller seller) {
-        sellers.add(seller);
-    }
-
-    public void addBuyer(Buyer buyer) {
-        buyers.add(buyer);
-    }
-
-    public void addViewing(Viewing viewing) {
-        viewings.add(viewing);
-    }
-
-    public void addEarnings(double amount) {
-        this.earnings += amount;
-    }
-
 }

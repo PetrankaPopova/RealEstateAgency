@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Заявка за покупка</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <style>
+    .button-container {
+      display: flex;
+      justify-content: space-around;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title has-text-centered">Купувач: <span th:text="${buyer.name}"></span></h1>
+
+  <h2 class="subtitle has-text-centered">Огледани имоти</h2>
+  <table class="table is-striped is-bordered is-hoverable">
+    <thead>
+    <tr>
+      <th>Адрес</th>
+      <th>Цена</th>
+      <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="viewing : ${viewings}">
+      <td th:text="${viewing.property.address}"></td>
+      <td th:text="${viewing.property.price} + ' лв.'"></td>
+      <td>
+        <div class="button-container">
+          <form th:action="@{/purchases/create}" method="post">  <!-- Updated action -->
+            <input type="hidden" name="buyerId" th:value="${buyer.id}"/>
+            <input type="hidden" name="propertyId" th:value="${viewing.property.id}"/>
+            <button class="button is-success is-small" type="submit">Купи</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

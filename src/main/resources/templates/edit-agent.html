@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Agent</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title has-text-centered">Редактиране на Агент</h1>
+    <form th:action="@{/agent/edit/{id}(id=${agent.id})}" th:object="${agent}" method="post" class="box">
+        <div class="field">
+            <label class="label" for="name">Име:</label>
+            <div class="control">
+                <input type="text" id="name" th:field="*{name}" class="input" required />
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="phoneNumber">Телефонен номер:</label>
+            <div class="control">
+                <input type="text" id="phoneNumber" th:field="*{phone}" class="input" required />
+            </div>
+        </div>
+
+        <div class="control">
+            <button type="submit" class="button is-primary">Запази</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

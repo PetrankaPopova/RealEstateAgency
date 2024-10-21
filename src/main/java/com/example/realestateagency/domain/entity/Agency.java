@@ -25,15 +25,4 @@ public class Agency extends BaseEntity {
     private List<Property> properties = new ArrayList<>();
     private double budget;
 
-    public void addAgent(Agent agent) {
-        agents.add(agent);
-    }
-
-    public void addProperty(Property property) {
-        properties.add(property);
-    }
-
-    public void updateBudget(double amount) {
-        this.budget += amount;
-    }
 }

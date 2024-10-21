@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Агенция Баланс</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <style>
+    .container {
+      margin-top: 40px;
+    }
+    .balance {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #3273dc;
+    }
+    .back-button {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title has-text-centered">Текущ Баланс на Агенцията</h1>
+  <div class="box">
+    <p class="subtitle has-text-centered">Общ баланс: <span class="balance" th:text="${balance} + ' лв.'"></span></p>
+  </div>
+  <div class="back-button has-text-centered">
+    <a href="/" class="button is-link">Обратно към началната страница</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактиране на Купувач</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title">Редактиране на Купувач</h1>
+
+  <form th:action="@{/buyers/edit/{id}(id=${buyer.id})}" method="post" th:object="${buyer}">
+    <div class="field">
+      <label class="label" for="name">Име:</label>
+      <div class="control">
+        <input class="input" type="text" id="name" th:field="*{name}" required />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label" for="budget">Бюджет:</label>
+      <div class="control">
+        <input class="input" type="number" id="budget" th:field="*{budget}" required />
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <button type="submit" class="button is-link">Запази Промените</button>
+        <a class="button is-light" th:href="@{/buyers}">Назад</a>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

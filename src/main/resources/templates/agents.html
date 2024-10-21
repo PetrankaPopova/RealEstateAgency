@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Управление на агенти</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      margin: 5px 0;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Управление на агенти</h1>
+
+
+<form th:action="@{/agent}" method="post" th:object="${newAgent}">
+  <label for="name">Име:</label>
+  <input type="text" id="name" name="name" th:field="*{name}" required />
+  <br />
+  <label for="phone">Телефонен номер:</label>
+  <input type="text" id="phone" name="phone" th:field="*{phone}" required />
+  <br />
+  <button type="submit">Добави агент</button>
+</form>
+<h2>Списък с агенти</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Име</th>
+    <th>Телефонен номер</th>
+    <th>Действия</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="agent : ${agents}">
+    <td th:text="${agent.name}">Име</td>
+    <td th:text="${agent.phone}">Телефонен номер</td>
+    <td>
+      <div class="button-container">
+        <form th:action="@{/agent/edit/{id}(id=${agent.id})}" method="get">
+          <input type="hidden" name="id" th:value="${agent.id}" />
+          <button type="submit">Редактирай</button>
+        </form>
+        <form th:action="@{/agent/delete/{id}(id=${agent.id})}" method="post">
+          <input type="hidden" name="id" th:value="${agent.id}" />
+          <button type="submit">Изтрий</button>
+        </form>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

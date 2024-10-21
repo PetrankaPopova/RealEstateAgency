@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация на огледи</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <style>
+    .button-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+    .table {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title has-text-centered">Регистрация на огледи</h1>
+
+  <!-- Form to create a new viewing -->
+  <form th:action="@{/viewings/create}" method="post" class="box">
+    <div class="field">
+      <label class="label">Купувач</label>
+      <div class="control">
+        <div class="select">
+          <select name="buyerId" required>
+            <option value="" disabled selected>Изберете купувач</option>
+            <option th:each="buyer : ${buyers}" th:value="${buyer.id}" th:text="${buyer.name}"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Имот</label>
+      <div class="control">
+        <div class="select">
+          <select name="propertyId" required>
+            <option value="" disabled selected>Изберете имот</option>
+            <option th:each="property : ${properties}" th:value="${property.id}" th:text="${property.address}"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Дата</label>
+      <div class="control">
+        <input class="input" type="datetime-local" name="date" required/>
+      </div>
+    </div>
+
+    <div class="control">
+      <button type="submit" class="button is-primary is-small">Добави оглед</button>
+    </div>
+  </form>
+  <h2 class="subtitle has-text-centered">Списък на огледи</h2>
+  <table class="table is-striped is-bordered is-hoverable">
+    <thead>
+    <tr>
+      <th>Купувач</th>
+      <th>Имот</th>
+      <th>Дата на огледа</th>
+      <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="viewing : ${viewings}">
+      <td th:text="${viewing.buyer.name}">Купувач</td>
+      <td th:text="${viewing.property.address}">Имот</td>
+      <!--<td th:text="${#dates.format(viewing.date, 'dd.MM.yyyy HH:mm')}">Дата на огледа</td>-->
+      <td>
+        <div class="button-container">
+          <form th:action="@{/viewings/delete/{id}(id=${viewing.id})}" method="post">
+            <input type="hidden" name="id" th:value="${viewing.id}" />
+            <button type="submit" class="button is-danger is-small">Изтрий</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

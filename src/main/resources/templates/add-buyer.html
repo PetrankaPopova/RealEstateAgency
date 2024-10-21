@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добави купувач</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <style>
+    .container {
+      margin-top: 40px;
+    }
+    .form-field {
+      margin-bottom: 20px;
+    }
+    .back-link {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title has-text-centered">Добави купувач</h1>
+
+  <form th:action="@{/buyers}" method="post" th:object="${buyer}" class="box">
+    <div class="field form-field">
+      <label class="label" for="name">Име:</label>
+      <div class="control">
+        <input class="input" type="text" id="name" name="name" th:field="*{name}" required />
+      </div>
+    </div>
+
+    <div class="field form-field">
+      <label class="label" for="budget">Бюджет:</label>
+      <div class="control">
+        <input class="input" type="number" id="budget" name="budget" th:field="*{budget}" required />
+      </div>
+    </div>
+
+    <div class="control">
+      <button type="submit" class="button is-link">Добави купувач</button>
+    </div>
+  </form>
+
+  <div class="back-link has-text-centered">
+  </div>
+</div>
