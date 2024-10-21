@@ -41,7 +41,7 @@ public class AgentController {
             model.addAttribute("agent", optionalAgent.get());
             return "edit-agent";
         }
-        return "redirect:/agent"; // или хвърлете изключение
+        return "redirect:/agent";
     }
 
 
